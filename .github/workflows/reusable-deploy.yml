@@ -1,0 +1,35 @@
+name: Docker image Deploy
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  docker:
+    env:
+     appName: "springboot-image"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Downloading manifests from GitHub
+      uses: actions/download-artifact@v3
+      with:
+       name: k8smanifestsArtifacts
+    - name: Deploy Application using SSH
+      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      env:
+       WELCOME: "ssh scp ssh pipelines"
+       LASTSSH: "Doing something after copying"
+      with:
+       host: '54.158.42.227'
+       user: 'lucamattiolivod'
+       pass: 'olivod0A@ugbgt'
+       port: 42006
+       connect_timeout: 10s
+       first_ssh: |
+        rm -rf /tmp/Docker
+        mkdir -p /tmp/Docker
+       scp: |
+        '*.yml' => /tmp/Docker/
+       last_ssh: |
+        cd /tmp/Docker/
+        sudo kubectl apply -f deployment.yml
