@@ -25,6 +25,15 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+      - uses: actions/upload-artifact@v3
+        with:
+         name: buildArtifact
+         path: target/*.war
+      - name: Storing manifests in GitHub
+        uses: actions/upload-artifact@v3
+        with:
+         name: k8smanifestsArtifacts
+         path: k8smanifests/*
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
