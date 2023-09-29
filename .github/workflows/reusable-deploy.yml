@@ -20,7 +20,7 @@ jobs:
        WELCOME: "ssh scp ssh pipelines"
        LASTSSH: "Doing something after copying"
       with:
-       host: 'lucamattiolivodsl0034.simplilearnlabs.com'
+       host: '35.172.220.31'
        user: 'lucamattiolivod'
        pass: 'olivod0A@ugbgt'
        port: 42006
