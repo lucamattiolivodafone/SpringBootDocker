@@ -13,4 +13,5 @@ jobs:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   Reusable-caller-job-deploy:
+    needs: Reusable-caller-job-build-and-upload
     uses: ./.github/workflows/reusable-deploy.yml
